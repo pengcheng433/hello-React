@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>LifeCycle All</title>
+    <script src="./unpkg.com_react@16.14.0_umd_react.development.js"></script>
+    <script src="./unpkg.com_react-dom@16.14.0_umd_react-dom.development.js"></script>
+    <!-- babel -->
+    <script src="./unpkg.com_babel-standalone@6.26.0_babel.min.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/prop-types/15.8.1/prop-types.js"></script>
+  </head>
+  <body>
+    <div id="test"></div>
+
+    <!-- 使用babel -->
+    <script type="text/babel">
+      console.log("App.js is running!");
+
+      class LifeCycle extends React.Component {
+        //初始化状态 1
+        constructor(props) {
+          super(props);
+          this.state = { count: 0 };
+          console.log(1, "constructor");
+        }
+        //组件将要挂载的钩子 2
+        componentWillMount() {
+          console.log(2, "componentWillMount");
+        }
+        //组件已经挂载/挂载完毕
+        componentDidMount() {
+          console.log(4, "componentDidMount");
+        }
+
+        //组件销毁前
+        componentWillUnmount() {
+          console.log(5, "componentWillUnmount");
+        }
+
+        // 控制组件的阀门  默认返回true  如果是false 就不更新了
+        shouldComponentUpdate() {
+          console.log("控制组件的阀门");
+          return true;
+        }
+        //组件将要更新
+        componentWillUpdate() {
+          console.log("componentWillUpdate", 1);
+        }
+        //他们中间有render
+        //组件更新后
+        componentDidUpdate() {
+          console.log("componentDidUpdate", 2);
+        }
+        //强制更新  无视更新
+        force = () => {
+          this.forceUpdate();
+        };
+        //plus fun
+        plus = () => {
+          const { count } = this.state;
+          this.setState({ count: count + 1 });
+        };
+        //卸载组件
+        unmonuet = () => {
+          ReactDOM.unmountComponentAtNode(document.getElementById("test"));
+        };
+        //渲染 3
+        render() {
+          console.log(3, "render");
+          return (
+            <div>
+              <h2>当前请求为:{this.state.count}</h2>
+              <button onClick={this.plus}>点我＋1</button>
+              <button onClick={this.unmonuet}>卸载组件</button>
+              <button onClick={this.force}>强制更新组件</button>
+            </div>
+          );
+        }
+      }
+
+      ReactDOM.render(<LifeCycle />, document.getElementById("test"));
+    </script>
+  </body>
+</html>

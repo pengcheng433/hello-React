@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>controlled_components</title>
+    <script src="./unpkg.com_react@16.14.0_umd_react.development.js"></script>
+    <script src="./unpkg.com_react-dom@16.14.0_umd_react-dom.development.js"></script>
+    <!-- babel -->
+    <script src="./unpkg.com_babel-standalone@6.26.0_babel.min.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/prop-types/15.8.1/prop-types.js"></script>
+  </head>
+  <body>
+    <div id="test"></div>
+
+    <!-- 使用babel -->
+    <script type="text/babel">
+      console.log("App.js is running!");
+
+      class FormComponont extends React.Component {
+        state = {
+          account: "",
+          pwd: "",
+        };
+        changgeInput = (e, key) => {
+          console.log(this.state);
+
+          this.setState({ [key]: e.target.value });
+        };
+
+        render() {
+          return (
+            <form method="get" onSubmit={this.summbit}>
+              <label for="accout">账号:</label>
+              <input
+                type="text"
+                name="accout"
+                onChange={(e) => this.changgeInput(e, "account")}
+              />
+              <label for="pwd">密码:</label>
+              <input
+                type="password"
+                name="pwd"
+                onChange={(e) => this.changgeInput(e, "pwd")}
+              />
+
+              <button>提交</button>
+            </form>
+          );
+        }
+        summbit = (event) => {
+          event.preventDefault();
+          console.log(this.state);
+        };
+      }
+
+      ReactDOM.render(<FormComponont />, document.getElementById("test"));
+    </script>
+  </body>
+</html>

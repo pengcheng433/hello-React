@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>event processing</title>
+    <script src="./unpkg.com_react@16.14.0_umd_react.development.js"></script>
+    <script src="./unpkg.com_react-dom@16.14.0_umd_react-dom.development.js"></script>
+    <!-- babel -->
+    <script src="./unpkg.com_babel-standalone@6.26.0_babel.min.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/prop-types/15.8.1/prop-types.js"></script>
+  </head>
+  <body>
+    <div id="test"></div>
+
+    <!-- 使用babel -->
+    <script type="text/babel">
+      console.log("App.js is running!");
+
+      class InputComponont extends React.Component {
+        inputRef = React.createRef();
+
+        render() {
+          return (
+            <div>
+              {/* <input
+                type="text"
+                ref={(currentNode) => (this.input = currentNode)}
+            />   */}
+              <input type="text" ref={this.inputRef} />
+              <button onClick={this.show}>提示输入数据</button>
+              <input type="text" onBlur={this.show2} />
+            </div>
+          );
+        }
+        show = () => {
+          console.log(this.inputRef.current.value);
+        };
+        show2 = (e) => {
+          console.log(e.target.value);
+        };
+      }
+
+      ReactDOM.render(<InputComponont />, document.getElementById("test"));
+    </script>
+  </body>
+</html>

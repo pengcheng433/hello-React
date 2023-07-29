@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>class组件refs back fun</title>
+    <script src="./unpkg.com_react@16.14.0_umd_react.development.js"></script>
+    <script src="./unpkg.com_react-dom@16.14.0_umd_react-dom.development.js"></script>
+    <!-- babel -->
+    <script src="./unpkg.com_babel-standalone@6.26.0_babel.min.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/prop-types/15.8.1/prop-types.js"></script>
+  </head>
+  <body>
+    <div id="test"></div>
+
+    <!-- 使用babel -->
+    <script type="text/babel">
+      console.log("App.js is running!");
+
+      class InputComponont extends React.Component {
+        constructor(props) {
+          super(props);
+          const { str } = this.props;
+          this.state = { str: "" };
+          this.show = this.show.bind(this);
+          this.show2 = this.show2.bind(this);
+        }
+        bindrefinpt = (e) => {
+          this.input = e;
+        };
+        render() {
+          return (
+            <div>
+              {/* <input
+                type="text"
+                ref={(currentNode) => (this.input = currentNode)}
+            />   */}
+              <input type="text" ref={this.bindrefinpt} />
+              <button onClick={this.show}>提示输入数据</button>
+              <input
+                type="text"
+                ref={(currentNode) => (this.input2 = currentNode)}
+                onBlur={this.show2}
+              />
+            </div>
+          );
+        }
+        show() {
+          console.log(this.input.value);
+        }
+        show2() {
+          console.log(this.input2.value);
+        }
+      }
+
+      ReactDOM.render(<InputComponont />, document.getElementById("test"));
+    </script>
+  </body>
+</html>

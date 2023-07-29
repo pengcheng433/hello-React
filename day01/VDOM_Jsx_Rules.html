@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>jsxrules</title>
+    <style>
+      .title {
+        color: blue;
+      }
+    </style>
+    <script src="./unpkg.com_react@16.14.0_umd_react.development.js"></script>
+    <script src="./unpkg.com_react-dom@16.14.0_umd_react-dom.development.js"></script>
+    <!-- babel -->
+    <script src="./unpkg.com_babel-standalone@6.26.0_babel.min.js"></script>
+  </head>
+  <body>
+    <div id="test"></div>
+    <div id="RealDom"></div>
+
+    <!-- 使用babel -->
+    <script type="text/babel">
+      const myid = "IdDom";
+      const text = "textaraeacontext";
+      console.log("App.js is running!");
+      const VDom = (
+       <div>
+        <h1 className="title" id={myid}>
+          <span style={{color:'red',fontSize:'50px'}}> {text}</span>
+        </h1>
+        <input type="text" />
+        <good>good小写</good>
+        <Good >Good大写</Good>
+        </div>
+
+      );
+      ReactDOM.render(VDom, document.getElementById("test"));
+    </script>
+  </body>
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>LifeCycle</title>
+    <script src="./unpkg.com_react@16.14.0_umd_react.development.js"></script>
+    <script src="./unpkg.com_react-dom@16.14.0_umd_react-dom.development.js"></script>
+    <!-- babel -->
+    <script src="./unpkg.com_babel-standalone@6.26.0_babel.min.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/prop-types/15.8.1/prop-types.js"></script>
+  </head>
+  <body>
+    <div id="test"></div>
+
+    <!-- 使用babel -->
+    <script type="text/babel">
+      console.log("App.js is running!");
+
+      class LifeCycle extends React.Component {
+        state = {
+          opacity: 1,
+        };
+        //挂载
+        componentDidMount() {
+          this.timer = setInterval(() => {
+            let { opacity } = this.state;
+            opacity -= 0.1;
+            if (opacity <= 0) opacity = 1;
+            this.setState({ opacity });
+          }, 1000);
+        }
+        //组件将要卸载
+        componentWillUnmount() {
+          //清楚定时器
+          clearInterval(this.timer);
+        }
+        //渲染
+        render() {
+          return (
+            <div>
+              <h2 style={{ opacity: this.state.opacity }}>React学不会怎么办</h2>
+              <button onClick={this.death}>不活了</button>
+            </div>
+          );
+        }
+        death = () => {
+          ReactDOM.unmountComponentAtNode(document.getElementById("test"));
+        };
+      }
+
+      ReactDOM.render(<LifeCycle />, document.getElementById("test"));
+    </script>
+  </body>
+</html>
