@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Diffing</title>
+    <script src="https://cdn.jsdelivr.net/npm/react@17.0.2/umd/react.development.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/react-dom@17.0.2/umd/react-dom.development.js"></script>
+    <!-- babel -->
+    <script src="./unpkg.com_babel-standalone@6.26.0_babel.min.js"></script>
+    <style></style>
+  </head>
+  <body>
+    <div id="list"></div>
+
+    <!-- 使用babel -->
+    <script type="text/babel">
+      class Person extends React.Component {
+        constructor(props) {
+          super(props);
+          this.state = {
+            person: [
+              { id: 1, name: "小张", age: 18 },
+              { id: 2, name: "小李", age: 19 },
+            ],
+          };
+        }
+
+        add = () => {
+          const { person } = this.state;
+          const p1 = {
+            id: this.state.person.length + 1,
+            name: "NAME1",
+            age: 20,
+          };
+          this.setState({
+            person: [p1, ...person],
+          });
+        };
+
+        //渲染 3
+        render() {
+          return (
+            <div ref="refList">
+              <button onClick={this.add}> 添加一个人 </button>
+              {this.state.person.map((item, index) => {
+                return (
+                  <li key={index}>
+                    {item.name}---{item.age}
+                  </li>
+                );
+              })}
+
+              {this.state.person.map((item) => {
+                return (
+                  <li key={JSON.stringify(item)}>
+                    {item.name}---{item.age}
+                  </li>
+                );
+              })}
+            </div>
+          );
+        }
+      }
+      ReactDOM.render(<Person />, document.getElementById("list"));
+    </script>
+  </body>
+</html>
