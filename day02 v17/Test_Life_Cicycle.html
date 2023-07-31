@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>New_Life_Cicycle</title>
+    <script src="https://cdn.jsdelivr.net/npm/react@17.0.2/umd/react.development.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/react-dom@17.0.2/umd/react-dom.development.js"></script>
+    <!-- babel -->
+    <script src="./unpkg.com_babel-standalone@6.26.0_babel.min.js"></script>
+    <style>
+      #list {
+        width: 200px;
+        height: 150px;
+        background-color: skyblue;
+        overflow: auto;
+      }
+      .newsitem {
+        height: 30px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="list"></div>
+
+    <!-- 使用babel -->
+    <script type="text/babel">
+      /*  V17.02
+       1.初始化阶段 由ReactDom.render()触发
+          constructor ()
+          getDeriveStateFromPorops()
+          render()
+          componentDidMonut()   //常用  定时器 网络请求 订阅消息
+       2.更新阶段:组件内部this.setstate或者父组件render触发
+          1.getDeriveStateFromprops()  // this.forceUpdate(); 强制更新
+          2.componentWillUpdate()
+          3.render()
+          4.getSnapshotBeforeUpdate()
+          5.ComponentDiaUpdate()
+       3.卸载组件 由ReactDom.unmountComponentAtNode() 触发
+       　　1.componentWillUnmount //常用 关闭定时器 取消订阅
+      */
+
+      class List extends React.Component {
+        constructor(props) {
+          super(props);
+          this.state = { arr: [1] };
+        }
+        componentDidMount() {
+          this.timer = setInterval(() => {
+            const { arr } = this.state;
+            const news = arr.length + 1;
+            // console.log(news);
+            this.setState({ arr: arr.concat(news) });
+          }, 1000);
+        }
+        getSnapshotBeforeUpdate() {
+          // console.log(this.refs.refList);
+          if (this.state.arr.length > 15) {
+            clearInterval(this.timer);
+          }
+          return this.refs.refList.scrollHeight;
+        }
+        componentDidUpdate(preProps, preState, snaps) {
+          console.log("snaps", snaps);
+          console.log(this.refs.refList.scrollTop);
+          console.log(this.refs.refList.scrollHeight);
+          this.refs.refList.scrollTop = this.refs.refList.scrollHeight - snaps;
+        }
+
+        //渲染 3
+        render() {
+          return (
+            <div ref="refList">
+              {this.state.arr.map((item) => {
+                return (
+                  <div className="newsitem" key={item}>
+                    新闻{item}
+                  </div>
+                );
+              })}
+            </div>
+          );
+        }
+      }
+      ReactDOM.render(<List />, document.getElementById("list"));
+    </script>
+  </body>
+</html>

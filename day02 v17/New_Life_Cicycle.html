@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>New_Life_Cicycle</title>
+    <script src="https://cdn.jsdelivr.net/npm/react@17.0.2/umd/react.development.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/react-dom@17.0.2/umd/react-dom.development.js"></script>
+    <!-- babel -->
+    <script src="./unpkg.com_babel-standalone@6.26.0_babel.min.js"></script>
+  </head>
+  <body>
+    <div id="test"></div>
+
+    <!-- 使用babel -->
+    <script type="text/babel">
+      /*  V16.8
+       1.初始化阶段 由ReactDom.render()触发
+          constructor ()
+          componentWillMont()
+          render()
+          componentDidMonut()   //常用  定时器 网络请求 订阅消息
+       2.更新阶段:组件内部this.setstate或者父组件render触发
+          1.shouldComponentUpdate()  // this.forceUpdate(); 强制更新
+          2.componentWillUpdate()
+          3.render()
+          4.ComponentDiaUpdate()
+       3.卸载组件 由ReactDom.unmountComponentAtNode() 触发
+       　　1.componentWillUnmount //常用 关闭定时器 取消订阅
+      */
+      class LifeCycle extends React.Component {
+        //初始化状态 1
+        constructor(props) {
+          super(props);
+          this.state = { count: 0 };
+          console.log(1, "constructor");
+        }
+        //返回状态对象
+        static getDerivedStateFromProps(props, state) {
+          console.log("static getDerivedStateFromProps");
+          return null;
+        }
+
+        getSnapshotBeforeUpdate(prevProps, prevState) {
+          console.log("getSnapshotBeforeUpdate");
+          return "11";
+        }
+        componentDidUpdate(preProps, preState,snap) {
+          console.log("componentDidUpdate");
+          console.log(preProps);
+          console.log(preState);
+          console.log(snap);
+        }
+        //plus fun
+        plus = () => {
+          const { count } = this.state;
+          this.setState({ count: count + 1 });
+        };
+        //卸载组件
+        unmonuet = () => {
+          ReactDOM.unmountComponentAtNode(document.getElementById("test"));
+        };
+        //渲染 3
+        render() {
+          console.log(3, "render");
+          console.log(this.state);
+          return (
+            <div>
+              <h2>当前请求为:{this.state.count}</h2>
+              <button onClick={this.plus}>点我＋1</button>
+              <button onClick={this.unmonuet}>卸载组件</button>
+              <button onClick={this.force}>强制更新组件</button>
+            </div>
+          );
+        }
+      }
+      ReactDOM.render(
+        <LifeCycle test="STRING" />,
+        document.getElementById("test")
+      );
+    </script>
+  </body>
+</html>
