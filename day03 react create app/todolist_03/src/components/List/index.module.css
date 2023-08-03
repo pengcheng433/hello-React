@@ -1,0 +1,28 @@
+.title {
+  width: 100%;
+  text-align: left;
+}
+input {
+  border-radius: 2px;
+}
+input:focus {
+  border: 2px solid #b5dff2; /* 设置选中时的边框样式 */
+  outline: none; /* 取消选中时的默认外边框样式 */
+}
+
+li {
+  display: flex;
+  align-items: center;
+  /* 这里可以设置元素的其他样式 */
+}
+
+.element-wrapper {
+  display: flex;
+  align-items: center;
+}
+.shown {
+  display: none;
+}
+li:hover .shown {
+  display: block;
+}
