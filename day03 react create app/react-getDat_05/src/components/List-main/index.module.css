@@ -1,0 +1,25 @@
+.wrap{
+
+}
+.listMain {
+  display: grid;
+  grid-template-columns: 33.3% 33.3% 33.3%;
+  /* max-width: 960px; */
+  margin: 0 auto;
+  text-align: center;
+  /* border-top: 1px solid gray; */
+
+}
+.row{
+  border-bottom: 1px solid gray;
+}
+.item {
+  border-bottom: 1px solid gray;
+  border-top: 1px solid gray;
+  border-right: 1px solid gray;
+  padding: 20px 25px;
+  margin-top: 20px;
+}
+.pic {
+  width: 100%;
+}
