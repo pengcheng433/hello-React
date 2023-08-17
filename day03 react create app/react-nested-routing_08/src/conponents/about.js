@@ -3,12 +3,14 @@ import MyNavLink from "./MyNavLink";
 import { Route, Link, NavLink, Switch, Redirect } from "react-router-dom";
 import news from "../page/news";
 import test from "../page/test";
+import Header from "./header";
 export default class about extends Component {
   render() {
     return (
       <div>
         <h1>abhout</h1>
-        abhout
+        <h2>一般组件 调用route的API</h2>
+        <Header />
         <div className="main">
           <div className="leftmain">
             <ul>

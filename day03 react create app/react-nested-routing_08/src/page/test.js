@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import Detail from "./detail";
-import { Link, Route } from "react-router-dom";
+import { Link, Route, Router } from "react-router-dom";
 
 export default class test extends Component {
   state = {
@@ -9,6 +9,12 @@ export default class test extends Component {
       { id: 2, title: "消息2" },
       { id: 3, title: "消息3" },
     ],
+  };
+  pushgo = () => {
+    this.props.history.push("/about/test/detail", { id: 1, title: "title" });
+  };
+  replacego = () => {
+    this.props.history.replace("/about/test/detail", { id: 1, title: "title" });
   };
   render() {
     const { arr } = this.state;
@@ -42,6 +48,9 @@ export default class test extends Component {
                 >
                   {item.title}
                 </Link>
+                {/* 使用onlick 调用路由 */}
+                <button onClick={this.pushgo}>push查看</button>
+                <button onClick={this.replacego}>replace查看</button>
               </div>
             );
           })}
@@ -51,8 +60,10 @@ export default class test extends Component {
         {/* 携带search参数 */}
         {/* <Route path="/about/test/detail" component={Detail} /> */}
         {/* 携带state参数 */}
-        <Route path="/about/test/detail" component={Detail} />
+        {/* <Route path="/about/test/detail" component={Detail} /> */}
 
+        {/*开启replace模式为替换当前路由   默认是push模式  push模式会存在历史路由*/}
+        <Route replace={true} path="/about/test/detail" component={Detail} />
       </div>
     );
   }
