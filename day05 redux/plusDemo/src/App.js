@@ -1,6 +1,11 @@
 import React, { Component } from "react";
 import { Button, Select } from "antd";
 import store from "./redux/store";
+import {
+  createAddplus,
+  createSubtract,
+  createAsyncAddplus,
+} from "./redux/action";
 export default class App extends Component {
   constructor(props) {
     super(props);
@@ -49,22 +54,23 @@ export default class App extends Component {
       console.log(3333);
     });
   };
-  componentDidMount() {
-    store.subscribe(() => {
-      this.forceUpdate();
-    });
-    console.log(this.forceUpdate);
-  }
+  //单独页面更新 render 因为redux里面的状态的值无法触发render
+  // componentDidMount() {
+  //   store.subscribe(() => {
+  //     this.forceUpdate();
+  //   });
+  //   console.log(this.forceUpdate);
+  // }
   storeAdd = () => {
-    store.dispatch({ type: "addplus", data: this.state.temp });
+    store.dispatch({ type: "ADDPLUS", data: this.state.temp });
   };
   storesubtract = () => {
-    store.dispatch({ type: "subtract", data: this.state.temp });
+    store.dispatch({ type: "SUBTRACT", data: this.state.temp });
   };
   storesingplus = () => {
     const count = store.getState();
     if (count % 2 !== 0) {
-      store.dispatch({ type: "addplus", data: this.state.temp });
+      store.dispatch({ type: "ADDPLUS", data: this.state.temp });
     }
   };
   storesawaitplus = async () => {
@@ -74,8 +80,17 @@ export default class App extends Component {
       }, 3000);
     });
     p.then((res) => {
-      store.dispatch({ type: "addplus", data: this.state.temp });
+      store.dispatch({ type: "ADDPLUS", data: this.state.temp });
     });
+  };
+  storeAddAction = () => {
+    store.dispatch(createAddplus(this.state.temp));
+  };
+  storesubtractAction = () => {
+    store.dispatch(createSubtract(this.state.temp));
+  };
+  storeAddAsyncAction = () => {
+    store.dispatch(createAsyncAddplus(this.state.temp, 3000));
   };
   render() {
     return (
@@ -103,7 +118,7 @@ export default class App extends Component {
         <Button type="primary" className="mt" onClick={this.awaitplus}>
           异步新增
         </Button>
-        <h1>Redux实现计算功能</h1>
+        <h1>Redux实现计算功能(dispatch 实现)</h1>
         <p> {store.getState()} </p>
         <Button type="primary" className="mt" onClick={this.storeAdd}>
           +
@@ -115,6 +130,25 @@ export default class App extends Component {
           奇数新增
         </Button>
         <Button type="primary" className="mt" onClick={this.storesawaitplus}>
+          异步新增
+        </Button>
+        <h1>Redux实现计算功能(action 实现)</h1>
+        <p> {store.getState()} </p>
+        <Button type="primary" className="mt" onClick={this.storeAddAction}>
+          +
+        </Button>
+        <Button
+          type="primary"
+          className="mt"
+          onClick={this.storesubtractAction}
+        >
+          -
+        </Button>
+        <Button
+          type="primary"
+          className="mt"
+          onClick={this.storeAddAsyncAction}
+        >
           异步新增
         </Button>
       </div>

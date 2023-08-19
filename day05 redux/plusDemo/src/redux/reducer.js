@@ -2,9 +2,9 @@ const initvalue = 0;
 const reducer = (preState = initvalue, action) => {
   const { type, data } = action;
   switch (type) {
-    case "addplus":
+    case "ADDPLUS":
       return preState + data;
-    case "subtract":
+    case "SUBTRACT":
       return preState - data;
     default:
       return preState;
