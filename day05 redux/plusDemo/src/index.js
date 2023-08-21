@@ -14,7 +14,7 @@ ReactDOM.render(
   </ConfigProvider>,
   document.getElementById("root")
 );
-//因为diff算法 对应的key的计算 性能不会全部重新比较
+//因为diff算法 对应的key的计算 性能不会全部重新比较,检测redux状态改变，改变就刷新render
 store.subscribe(() => {
   ReactDOM.render(
     <ConfigProvider>
