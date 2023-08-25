@@ -14,26 +14,6 @@ export default class App extends Component {
         <div className="main">
           <div className="leftmain">
             <ul>
-              {/* 链接导航 */}
-              {/* <li>
-                <Link to="/about">about</Link>
-              </li>
-              <li>
-                <Link to="/home">home</Link>
-              </li> */}
-
-              {/*  动态导航链接
-              <li>
-                <NavLink to="/about" activeClassName="selected">
-                  about
-                </NavLink>
-              </li>
-              <li>
-                <NavLink to="/home" activeClassName="selected">
-                  home
-                </NavLink>
-              </li> */}
-
               {/* 封装标签体内容 */}
               <li>
                 <MyNavLink to="/about" children="About"></MyNavLink>
