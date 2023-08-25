@@ -11,6 +11,7 @@ import { ConfigProvider } from "antd";
 
 import { Provider } from "react-redux";
 ReactDOM.render(
+  // 使用Provider包裹app,让app后代所有的子组件都接收子组件
   <Provider store={store} >
     <ConfigProvider>
       <App />

@@ -7,7 +7,7 @@ const reducer = (preState = initvalue, action) => {
     case "SUBTRACT":
       return preState - data;
     default:
-      return 0;
+      return preState;
   }
 };
 export default reducer;
