@@ -10,6 +10,7 @@ export default class Lazyload extends Component {
   render() {
     return (
       <div>
+        <h2>Lazyload 懒加载组件</h2>
         <ul>
           <li>
             <MyNavLink to="/about">about</MyNavLink>
