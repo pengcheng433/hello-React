@@ -5,6 +5,7 @@ import HooksDemo from "./hooks";
 import { Fragment } from "react";
 import Context from "./view/context";
 import PureComponent from "./view/PureComponent";
+import Errorbound from "./view/ErrorBoundary";
 export default class App extends Component {
   render() {
     return (
@@ -19,6 +20,7 @@ export default class App extends Component {
         {/* context */}
 
         <PureComponent />
+        <Errorbound />
       </div>
     );
   }
