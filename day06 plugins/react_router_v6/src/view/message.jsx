@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 // import MyNavLink from "../conponents/MyNavLink";
-import { Link, Outlet, useNavigate } from "react-router-dom";
+import { Link, Outlet, useNavigate, } from "react-router-dom";
 import { Button } from "antd";
 import Detail from "./detail";
 export default function Message() {
